@@ -11,7 +11,8 @@ const HomeScreen = () => {
     <Container type="contentWrapper">
       <Container type="billsListContainer">
         <ExpenseTable
-          headingData={['ID', 'Date', 'Category', 'Description', 'Amount']}
+          headingData={['ID', 'Date', 'Category', 'Description', 'Amount', '']}
+          widthData={['10%', '20%', '20%', '20%', '20%', '10%']}
           data={seederData.bills}
         />
       </Container>
