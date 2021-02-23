@@ -2,7 +2,7 @@
  * Generates List of expenses
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   faEdit,
@@ -15,8 +15,6 @@ import { Table, Row, Cell } from './ExpenseTable.style';
 import Icon from '../Icon';
 
 const ExpenseTable = props => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <Table>
       <thead>
@@ -34,24 +32,33 @@ const ExpenseTable = props => {
       </thead>
       <tbody>
         {props.data.map(item => (
-          <>
-            <Row key={item.id}>
-              <Cell type="dataCell">{item.id}</Cell>
-              <Cell type="dataCell">{item.date}</Cell>
-              <Cell type="dataCell">{item.category}</Cell>
-              <Cell type="dataCell">{item.description}</Cell>
-              <Cell type="dataCell">{item.amount}</Cell>
-              <Cell type="actionCell">
-                <Icon
-                  type="noShadow"
-                  iconVal={faEllipsisV}
-                  iconMenuData={['Edit', 'Delete']}
-                />
-                {/* <Icon iconVal={faEdit} /> */}
-                {/* <Icon iconVal={faTrash} /> */}
-              </Cell>
-            </Row>
-          </>
+          <Row key={item.id}>
+            <Cell key={`idCell_${item.id}`} type="dataCell">
+              {item.id}
+            </Cell>
+            <Cell key={`dateCell_${item.id}`} type="dataCell">
+              {item.date}
+            </Cell>
+            <Cell key={`categoryCell_${item.id}`} type="dataCell">
+              {item.category}
+            </Cell>
+            <Cell key={`descriptionCell_${item.id}`} type="dataCell">
+              {item.description}
+            </Cell>
+            <Cell key={`amountCell_${item.id}`} type="dataCell">
+              {item.amount}
+            </Cell>
+            <Cell key={`actionCell_${item.id}`} type="actionCell">
+              <Icon
+                // key={`optionsIcon_${item.id}`}
+                type="noShadow"
+                iconVal={faEllipsisV}
+                iconMenuList={['Edit', 'Delete']}
+              />
+              {/* <Icon iconVal={faEdit} /> */}
+              {/* <Icon iconVal={faTrash} /> */}
+            </Cell>
+          </Row>
         ))}
       </tbody>
     </Table>

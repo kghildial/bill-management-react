@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
+  position: relative;
 
   justify-content: ${({ type }) => {
     switch (type) {
