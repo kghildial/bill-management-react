@@ -1,18 +1,19 @@
 import React from 'react';
 
+import seederData from '../seeder';
+
 // Custom component(s) import(s)
 import Container from '../components/Container';
+import ExpenseTable from '../components/ExpenseTable';
 
 const HomeScreen = () => {
   return (
     <Container type="contentWrapper">
       <Container type="billsListContainer">
-        <ul>
-          <li>one</li>
-          <li>two</li>
-          <li>three</li>
-          <li>four</li>
-        </ul>
+        <ExpenseTable
+          headingData={['ID', 'Date', 'Category', 'Description', 'Amount']}
+          data={seederData.bills}
+        />
       </Container>
       <Container type="chartContainer">
         <h1>Expense Chart</h1>
