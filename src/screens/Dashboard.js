@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from 'recharts';
 
 // Custom component(s) import(s)
 import Container from '../components/Container';
@@ -22,7 +32,7 @@ import {
 } from '../actions/billsDataActions';
 
 // Custom hook(s) / util method(s) import(s)
-import { getUniqueCategoryValues } from '../utils';
+import { getMonthName, getChartData } from '../utils';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -40,6 +50,10 @@ const Dashboard = () => {
     amount: '',
     date: '',
   });
+
+  const [chartData, setChartData] = useState(
+    getChartData(storeData.billsData[storeData.activeMonth])
+  );
 
   const resetForm = () => {
     setFormPreset({
@@ -72,6 +86,11 @@ const Dashboard = () => {
       }
     }
   }, [storeData.popupState.id, storeData.billsData, storeData.activeMonth]);
+
+  // Reset chart data on change of Active Month
+  useEffect(() => {
+    setChartData(getChartData(storeData.billsData[storeData.activeMonth]));
+  }, [storeData.activeMonth, storeData.billsData]);
 
   return (
     <>
@@ -225,7 +244,7 @@ const Dashboard = () => {
       </Popup>
       <Container type="contentWrapper">
         <Container type="billsListContainer">
-          <ControlsCenter />
+          <ControlsCenter variant="expenseTable" />
           <ExpenseTable
             headingData={[
               'ID',
@@ -246,7 +265,35 @@ const Dashboard = () => {
           />
         </Container>
         <Container type="chartContainer">
-          <h1>Expense Chart</h1>
+          <ControlsCenter variant="chartSection" />
+          <BarChart
+            width={500}
+            height={300}
+            data={chartData}
+            margin={{
+              top: 30,
+              right: 0,
+              left: 0,
+              bottom: 30,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend wrapperStyle={{ left: 0, bottom: -10 }} />
+            <Bar dataKey={getMonthName(storeData.activeMonth)} fill="#8884d8">
+              {chartData.map((entry, index) => (
+                <Cell
+                  fill={
+                    entry[getMonthName(storeData.activeMonth)] > 3000
+                      ? '#82ca9d'
+                      : '#8884d8'
+                  }
+                />
+              ))}
+            </Bar>
+          </BarChart>
         </Container>
       </Container>
     </>

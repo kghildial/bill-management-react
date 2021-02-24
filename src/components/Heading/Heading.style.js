@@ -8,6 +8,8 @@ export const HeadingTag = styled(props =>
     switch (type) {
       case 'popupHeading':
         return '0';
+      case 'chartHeading':
+        return '0 30px';
       default:
         return '';
     }

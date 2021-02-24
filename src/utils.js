@@ -38,3 +38,31 @@ export const getUniqueCategoryValues = categoriesList => {
 
   return categoriesList.filter(onlyUnique);
 };
+
+export const getMonthName = monthNum =>
+  [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ][monthNum - 1];
+
+export const getChartData = billsData => {
+  const clonedData = [...billsData];
+  const chartData = clonedData.map(entry => ({
+    name: `${entry.date.split('-')[1]} ${getMonthName(
+      Number(entry.date.split('-')[0])
+    )}`,
+    [getMonthName(Number(entry.date.split('-')[0]))]: entry.amount,
+  }));
+
+  return chartData;
+};

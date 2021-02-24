@@ -116,13 +116,14 @@ const Container = styled.div`
     switch (type) {
       case 'popupContentWrapper':
       case 'billsListContainer':
+      case 'chartContainer':
         return 'column';
       default:
         return '';
     }
   }};
 
-  justify-content: ${({ type }) => {
+  justify-content: ${({ type, variant }) => {
     switch (type) {
       case 'popupBackdrop':
       case 'iconWrapper':
@@ -131,7 +132,7 @@ const Container = styled.div`
       case 'fieldWrapper':
         return 'space-between';
       case 'controlsCenterWrapper':
-        return 'flex-end';
+        return variant === 'chartSection' ? 'space-between' : 'flex-end';
       default:
         return '';
     }
@@ -146,6 +147,8 @@ const Container = styled.div`
       case 'fieldWrapper':
       case 'controlsCenterWrapper':
       case 'addBillIcon':
+      case 'paymentStatsIcon':
+      case 'chartContainer':
         return 'center';
       default:
         return '';
@@ -217,6 +220,8 @@ const Container = styled.div`
       case 'iconWrapper':
       case 'popupCloseIcon':
         return '30px';
+      case 'controlsCenterWrapper':
+        return '95%';
       case 'fieldWrapper':
         return '100%';
       default:
@@ -246,6 +251,7 @@ const Container = styled.div`
       case 'billsListContainer':
       case 'iconWrapper':
       case 'addBillIcon':
+      case 'paymentStatsIcon':
         return '0 10px';
       case 'fieldWrapper':
         return '30px 0 10px';
