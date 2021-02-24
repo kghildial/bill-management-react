@@ -1,7 +1,107 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    display: none;
+  }
+  5% {
+    opacity: 0;
+    display: flex;
+  }
+  100% {
+    opacity: 1;
+    display: flex;
+  }
+`;
+
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    display: none;
+  }
+`;
+
+const slideIn = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(90vh);
+  }
+`;
+
+const slideOut = keyframes`
+  0% {
+    transform: translateY(90vh);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+`;
+
+const getAnimationName = (type, trigger) => {
+  switch (type) {
+    case 'popupBackdrop':
+      return trigger ? fadeIn : fadeOut;
+    case 'popupCard':
+      return trigger ? slideIn : slideOut;
+    default:
+      return '';
+  }
+};
 
 const Container = styled.div`
-  display: flex;
+  animation-name: ${({ type, trigger }) => {
+    switch (type) {
+      case 'popupBackdrop':
+        return getAnimationName(type, trigger);
+      case 'popupCard':
+        return getAnimationName(type, trigger);
+      default:
+        return 'flex';
+    }
+  }};
+
+  animation-duration: ${({ type, trigger }) => {
+    switch (type) {
+      case 'popupBackdrop':
+        return '0.5s';
+      case 'popupCard':
+        return '0.5s';
+      default:
+        return 'flex';
+    }
+  }};
+
+  animation-delay: ${({ type, trigger }) => {
+    switch (type) {
+      case 'popupCard':
+        return '0.3s';
+      default:
+        return 'flex';
+    }
+  }};
+
+  animation-timing-function: ${({ type, trigger }) => {
+    switch (type) {
+      case 'popupBackdrop':
+        return 'linear';
+      case 'popupCard':
+        return 'cubic-bezier(0.18, 0.89, 0.32, 1.28)';
+      default:
+        return 'flex';
+    }
+  }};
+
+  animation-fill-mode: forwards;
 
   display: ${({ type, trigger }) => {
     switch (type) {
@@ -64,8 +164,8 @@ const Container = styled.div`
         return '20px';
       case 'popupBackdrop':
         return '90px';
-      // case 'popupCard':
-      //   return '-100vh';
+      case 'popupCard':
+        return '-100vh';
       default:
         return '';
     }
@@ -222,7 +322,7 @@ const Container = styled.div`
   transition: ${({ type }) => {
     switch (type) {
       case 'popupCard':
-        return '0.5s cubic-bezier(0, 0, 0.56, 1.33)';
+        return '0.75s cubic-bezier(0.18, 0.89, 0.32, 1.28)';
       default:
         return '';
     }

@@ -74,7 +74,7 @@ export const ListTag = styled.ul`
     }
   }};
 
-  transition: height 0.5s cubic-bezier(0, 0, 0.56, 1.33);
+  transition: height 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 
   overflow: hidden;
 `;

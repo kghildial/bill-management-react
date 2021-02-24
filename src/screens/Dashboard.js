@@ -21,7 +21,11 @@ const Dashboard = () => {
     <>
       <Popup trigger={storeData.popupState.isOpen}>
         <Container type="popupContentWrapper">
-          <Heading type="popupHeading" level="2" text="Add/Edit a bill" />
+          <Heading
+            type="popupHeading"
+            level="2"
+            text={`${storeData.popupState.callType} a bill`}
+          />
 
           <Formik
             enableReinitialize
