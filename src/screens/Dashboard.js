@@ -5,6 +5,7 @@ import seederData from '../seeder';
 
 // Custom component(s) import(s)
 import Container from '../components/Container';
+import ControlsCenter from '../components/ControlsCenter';
 import Heading from '../components/Heading';
 import ExpenseTable from '../components/ExpenseTable';
 import Popup from '../components/Popup';
@@ -73,6 +74,7 @@ const Dashboard = () => {
       </Popup>
       <Container type="contentWrapper">
         <Container type="billsListContainer">
+          <ControlsCenter />
           <ExpenseTable
             headingData={[
               'ID',

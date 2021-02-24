@@ -23,3 +23,8 @@ export const IconTag = styled(FontAwesomeIcon)`
     }};
   }
 `;
+
+export const Label = styled.label`
+  margin: 5px 20px 5px 5px;
+  cursor: pointer;
+`;

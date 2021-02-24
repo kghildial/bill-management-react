@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 // Custom component(s) import(s)
 import Container from '../Container';
 import List from '../List';
-import { IconTag } from './Icon.style';
+import { IconTag, Label } from './Icon.style';
 
 // Action(s) import(s)
 import { updatePopupState } from '../../actions/uiStateActions';
 
-const Icon = ({ type, iconVal, iconMenuList, customClickHandler }) => {
+const Icon = ({ type, label, iconVal, iconMenuList, customClickHandler }) => {
   const dispatch = useDispatch();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,6 +27,7 @@ const Icon = ({ type, iconVal, iconMenuList, customClickHandler }) => {
   return (
     <Container type={type} onClick={customClickHandler || clickHandler}>
       <IconTag type={type} icon={iconVal} />
+      {label && <Label>{label}</Label>}
       {iconMenuList && (
         <List
           type="iconMenu"

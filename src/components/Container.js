@@ -115,6 +115,7 @@ const Container = styled.div`
   flex-direction: ${({ type }) => {
     switch (type) {
       case 'popupContentWrapper':
+      case 'billsListContainer':
         return 'column';
       default:
         return '';
@@ -129,6 +130,8 @@ const Container = styled.div`
         return 'center';
       case 'fieldWrapper':
         return 'space-between';
+      case 'controlsCenterWrapper':
+        return 'flex-end';
       default:
         return '';
     }
@@ -141,6 +144,8 @@ const Container = styled.div`
       case 'iconWrapper':
       case 'popupCloseIcon':
       case 'fieldWrapper':
+      case 'controlsCenterWrapper':
+      case 'addBillIcon':
         return 'center';
       default:
         return '';
@@ -215,6 +220,8 @@ const Container = styled.div`
       case 'iconWrapper':
       case 'popupCloseIcon':
         return '30px';
+      case 'controlsCenterWrapper':
+        return '50px';
       case 'popupBackdrop':
         return 'calc(100vh - 90px)';
       default:
@@ -229,9 +236,12 @@ const Container = styled.div`
       case 'chartContainer':
       case 'billsListContainer':
       case 'iconWrapper':
+      case 'addBillIcon':
         return '0 10px';
       case 'fieldWrapper':
         return '30px 0 10px';
+      case 'controlsCenterWrapper':
+        return '10px 20px';
       default:
         return '';
     }
@@ -281,11 +291,15 @@ const Container = styled.div`
     }
   }};
 
+  border-right: ${({ type }) =>
+    type === 'addBillIcon' ? '1px solid #ccc' : ''};
+
   border-radius: ${({ type }) => {
     switch (type) {
       case 'chartContainer':
       case 'billsListContainer':
       case 'iconWrapper':
+      case 'controlsCenterWrapper':
         return '5px';
       case 'popupCard':
         return '10px';
@@ -299,11 +313,8 @@ const Container = styled.div`
       case 'headerContainer':
       case 'chartContainer':
       case 'billsListContainer':
+      case 'controlsCenterWrapper':
         return '14px 14px 60px 0 rgb(0 0 0 / 20%)';
-      // case 'iconWrapper':
-      //   return variant !== 'noShadow'
-      //     ? '3px 3px 10px rgb(0 0 0 / 20%), -3px -3px 20px rgb(0 0 0 / 10%)'
-      //     : '';
       default:
         return '';
     }
@@ -313,6 +324,7 @@ const Container = styled.div`
     switch (type) {
       case 'iconWrapper':
       case 'popupCloseIcon':
+      case 'addBillIcon':
         return 'pointer';
       default:
         return '';
