@@ -3,6 +3,15 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
 
+  display: ${({ type, trigger }) => {
+    switch (type) {
+      case 'popupBackdrop':
+        return trigger ? 'flex' : 'none';
+      default:
+        return 'flex';
+    }
+  }};
+
   flex-direction: ${({ type }) => {
     switch (type) {
       case 'popupContentWrapper':

@@ -3,13 +3,13 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 // Custom component(s) import(s)
 import Headar from './components/Header';
-import HomeScreen from './screens/HomeScreen';
+import Dashboard from './screens/Dashboard';
 
 function App() {
   return (
     <Router>
       <Headar />
-      <Route path="/" exact component={HomeScreen}></Route>
+      <Route path="/" exact component={Dashboard}></Route>
       {/* TODO: Render Footer here */}
     </Router>
   );

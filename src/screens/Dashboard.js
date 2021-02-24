@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import seederData from '../seeder';
@@ -13,10 +13,15 @@ import Select from '../components/Select';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
 
-const HomeScreen = () => {
+const Dashboard = () => {
+  const [popupState, setPopupState] = useState({
+    isOpen: false,
+    callType: null,
+  });
+
   return (
     <>
-      <Popup>
+      <Popup trigger={popupState.isOpen}>
         <Container type="popupContentWrapper">
           <Icon type="popupCloseIcon" iconVal={faTimes} />
           <Heading type="popupHeading" level="2" text="Add/Edit a bill" />
@@ -88,4 +93,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default Dashboard;
