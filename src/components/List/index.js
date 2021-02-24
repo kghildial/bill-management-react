@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 // Custom component(s) import(s)
 import { ListTag, ListItem } from './List.style';
 
-const List = ({ type, listData, trigger }) => {
+// Custom hook(s) / util method(s) import(s)
+import { useOutsideAlerter } from '../../utils';
+
+const List = ({ type, listData, trigger, outsideClickCallback }) => {
+  const listRef = useRef(null);
+
+  // Custom hook that triggers user defined changes on clicking outside the list
+  useOutsideAlerter(listRef, isOutsideClicked => {
+    if (isOutsideClicked && outsideClickCallback) outsideClickCallback();
+  });
+
   return (
-    <ListTag type={type} trigger={trigger}>
+    <ListTag ref={listRef} type={type} trigger={trigger}>
       {listData.map((item, index) => (
         <ListItem key={`listItem_${index + 1}`} type={type}>
           {item}

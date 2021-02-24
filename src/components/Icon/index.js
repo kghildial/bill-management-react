@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 // Custom component(s) import(s)
@@ -17,7 +17,12 @@ const Icon = ({ iconVal, iconMenuList }) => {
     <Container type="iconWrapper" variant="noShadow" onClick={clickHandler}>
       <IconTag icon={iconVal} />
       {iconMenuList && (
-        <List type="iconMenu" listData={iconMenuList} trigger={isMenuOpen} />
+        <List
+          type="iconMenu"
+          listData={iconMenuList}
+          trigger={isMenuOpen}
+          outsideClickCallback={() => setIsMenuOpen(false)}
+        />
       )}
     </Container>
   );

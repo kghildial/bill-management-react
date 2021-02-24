@@ -84,10 +84,6 @@ export const ListItem = styled.li`
 
   border-bottom: 1px solid #ccc;
 
-  &:last-of-type {
-    border-bottom: none;
-  }
-
   width: 100%;
   text-align: left;
 
