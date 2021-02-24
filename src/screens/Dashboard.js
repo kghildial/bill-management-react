@@ -30,6 +30,8 @@ const Dashboard = () => {
     popupState: useSelector(state => state.uiStates.popupState),
     activeMonth: useSelector(state => state.uiStates.activeMonth),
     billsData: useSelector(state => state.billsData),
+    categories: useSelector(state => state.categories),
+    activeCategory: useSelector(state => state.uiStates.activeCategory),
   };
 
   const [formPreset, setFormPreset] = useState({
@@ -177,11 +179,7 @@ const Dashboard = () => {
                       <Select
                         name="category"
                         label="Category"
-                        optionsList={getUniqueCategoryValues(
-                          storeData.billsData[storeData.activeMonth].map(
-                            entry => entry.category
-                          )
-                        )}
+                        optionsList={storeData.categories}
                         placeholder="Choose one..."
                       />
                       <Input
@@ -238,7 +236,13 @@ const Dashboard = () => {
               '',
             ]}
             widthData={['10%', '20%', '20%', '20%', '20%', '10%']}
-            data={storeData.billsData[storeData.activeMonth]}
+            data={
+              storeData.activeCategory !== ''
+                ? storeData.billsData[storeData.activeMonth].filter(
+                    entry => entry.category === storeData.activeCategory
+                  )
+                : storeData.billsData[storeData.activeMonth]
+            }
           />
         </Container>
         <Container type="chartContainer">

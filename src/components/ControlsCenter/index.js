@@ -11,12 +11,15 @@ import { Select, Label } from './ControlsCenter.style';
 import {
   updatePopupState,
   updateActiveMonth,
+  updateActiveCategory,
 } from '../../actions/uiStateActions';
 
 const ControlsCenter = () => {
   const dispatch = useDispatch();
   const storeData = {
     activeMonth: useSelector(state => state.uiStates.activeMonth),
+    categories: useSelector(state => state.categories),
+    activeCategory: useSelector(state => state.uiStates.activeCategory),
   };
 
   return (
@@ -37,7 +40,7 @@ const ControlsCenter = () => {
         }
       />
 
-      {/* <Label htmlFor="categoryFilter">Month:</Label> */}
+      <Label htmlFor="categoryFilter">Month:</Label>
       <Select
         id="monthFilter"
         name="monthFilter"
@@ -61,8 +64,20 @@ const ControlsCenter = () => {
       </Select>
 
       {/* <Label htmlFor="categoryFilter">Filter by category:</Label> */}
-      <Select id="categoryFilter" name="categoryFilter" value="">
-        <option value="--select--">Filter by category</option>
+      <Select
+        id="categoryFilter"
+        name="categoryFilter"
+        value={storeData.activeCategory}
+        onChange={event => {
+          dispatch(updateActiveCategory(event.target.value));
+        }}
+      >
+        <option value="">Filter by category ?</option>
+        {storeData.categories.map(category => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
       </Select>
     </Container>
   );

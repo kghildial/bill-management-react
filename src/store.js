@@ -15,6 +15,7 @@ const initialState = {
       id: null,
     },
     activeMonth: 1,
+    activeCategory: '',
   },
   billsData: seederData,
 };
@@ -22,6 +23,18 @@ const initialState = {
 const reducer = combineReducers({
   uiStates: uiStatesReducer,
   billsData: billDataReducer,
+  categories: () => [
+    'Convertible',
+    'Coupe',
+    'Crossover',
+    'Hatchback',
+    'Minivan',
+    'Pickup Truck',
+    'Sedan',
+    'Station Wagon',
+    'SUV',
+    'Van',
+  ],
 });
 
 const middleware = [];

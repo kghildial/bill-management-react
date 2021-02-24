@@ -19,7 +19,7 @@ export const Select = styled.select`
         return '';
     }
   }}; */
-  margin: 0 30px 0 10px;
+  margin: 0 30px 0 0;
   cursor: pointer;
 
   /* &:hover {
