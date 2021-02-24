@@ -14,16 +14,24 @@ export const billDataReducer = (state = { billsData: seederData }, action) => {
         entry => entry.id === action.payload.id
       );
 
-      let newBillsData = [...state];
+      let editedBillsData = [...state];
 
-      newBillsData[editIndex] = {
-        ...newBillsData[editIndex],
+      editedBillsData[editIndex] = {
+        ...editedBillsData[editIndex],
         ...action.payload,
       };
 
-      return newBillsData;
+      return editedBillsData;
     case DELETE_BILL:
-      return '';
+      const delIndex = state.findIndex(entry => entry.id === action.payload);
+
+      let newBillsData = [...state];
+      newBillsData.splice(delIndex, 1);
+
+      return newBillsData.map((entry, index) => {
+        if (index >= delIndex) entry.id -= 1;
+        return entry;
+      });
     default:
       return state;
   }

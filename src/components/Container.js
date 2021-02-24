@@ -194,6 +194,15 @@ const Container = styled.div`
     }
   }};
 
+  min-width: ${({ type }) => {
+    switch (type) {
+      case 'popupCard':
+        return '250px';
+      default:
+        return '';
+    }
+  }};
+
   width: ${({ type }) => {
     switch (type) {
       case 'headerContainer':

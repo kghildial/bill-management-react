@@ -47,6 +47,11 @@ const Dashboard = () => {
     });
   };
 
+  // Reset the form whenever callType === 'Add'
+  useEffect(() => {
+    if (storeData.popupState.callType === 'Add') resetForm();
+  }, [storeData.popupState.callType]);
+
   // Prefill form for edit
   useEffect(() => {
     if (!!storeData.popupState.id) {
@@ -55,23 +60,39 @@ const Dashboard = () => {
           entry => entry.id === storeData.popupState.id
         ),
       };
+      if (Object.keys(matchedData).length > 0) {
+        const splitDate = matchedData.date.split('-');
+        matchedData.date = `${splitDate[2]}-${splitDate[0]}-${splitDate[1]}`;
+        delete matchedData.id;
 
-      const splitDate = matchedData.date.split('-');
-      matchedData.date = `${splitDate[2]}-${splitDate[0]}-${splitDate[1]}`;
-      delete matchedData.id;
-
-      setFormPreset(matchedData);
+        setFormPreset(matchedData);
+      }
     }
   }, [storeData.popupState.id, storeData.billsData]);
 
   return (
     <>
-      <Popup trigger={storeData.popupState.isOpen}>
+      <Popup
+        trigger={storeData.popupState.isOpen}
+        callType={storeData.popupState.callType}
+      >
         <Container type="popupContentWrapper">
           <Heading
             type="popupHeading"
             level="2"
-            text={`${storeData.popupState.callType} a bill`}
+            text={(() => {
+              const { callType, id } = storeData.popupState;
+              switch (callType) {
+                case 'Add':
+                  return `${callType} a bill`;
+                case 'Edit':
+                  return `${callType} bill #${id}`;
+                case 'Delete':
+                  return `${callType} bill #${id}?`;
+                default:
+                  return '';
+              }
+            })()}
           />
 
           <Formik
@@ -110,17 +131,12 @@ const Dashboard = () => {
                   dispatch(editBillData(editPayload));
                   break;
                 case 'Delete':
+                  dispatch(deleteBillData(storeData.popupState.id));
                   break;
                 default: // Do nothing
               }
-              // Delete flow
-              // Send the ID to delete
-              // post deletion re-assignment of IDs
 
-              // Re-render expense table
-              // Close popup & reset callType tp null
               setSubmitting(false);
-              resetForm();
               dispatch(
                 updatePopupState({ isOpen: false, callType: null, id: null })
               );
@@ -129,30 +145,57 @@ const Dashboard = () => {
             {({ isSubmitting }) => (
               <Container type="formWrapper">
                 <Form>
-                  <Input
-                    type="text"
-                    name="description"
-                    label="Description"
-                    placeholder="Something good..."
-                  />
-                  <Select
-                    name="category"
-                    label="Category"
-                    optionsList={getUniqueCategoryValues(
-                      storeData.billsData.map(entry => entry.category)
-                    )}
-                    placeholder="Choose one..."
-                  />
-                  <Input
-                    type="number"
-                    name="amount"
-                    label="Amount"
-                    placeholder="Budget Friendly... ?"
-                  />
-                  <Input type="date" name="date" label="Date" />
-                  <Button type="submit" disabled={isSubmitting}>
-                    Submit
+                  {storeData.popupState.callType !== 'Delete' && (
+                    <>
+                      <Input
+                        type="text"
+                        name="description"
+                        label="Description"
+                        placeholder="Something good..."
+                      />
+                      <Select
+                        name="category"
+                        label="Category"
+                        optionsList={getUniqueCategoryValues(
+                          storeData.billsData.map(entry => entry.category)
+                        )}
+                        placeholder="Choose one..."
+                      />
+                      <Input
+                        type="number"
+                        name="amount"
+                        label="Amount"
+                        placeholder="Budget Friendly... ?"
+                      />
+                      <Input type="date" name="date" label="Date" />
+                    </>
+                  )}
+                  <Button
+                    type="submit"
+                    variant="formSubmitBtn"
+                    disabled={isSubmitting}
+                    callType={storeData.popupState.callType}
+                  >
+                    {['Add', 'Edit'].indexOf(storeData.popupState.callType) !==
+                    -1
+                      ? 'Submit'
+                      : 'Yes'}
                   </Button>
+                  {storeData.popupState.callType === 'Delete' && (
+                    <Button
+                      onClick={() => {
+                        dispatch(
+                          updatePopupState({
+                            isOpen: false,
+                            callType: null,
+                            id: null,
+                          })
+                        );
+                      }}
+                    >
+                      No
+                    </Button>
+                  )}
                 </Form>
               </Container>
             )}

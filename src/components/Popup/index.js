@@ -9,19 +9,21 @@ import Icon from '../Icon';
 // Action(s) import(s)
 import { updatePopupState } from '../../actions/uiStateActions';
 
-const Popup = ({ children, trigger }) => {
+const Popup = ({ children, trigger, callType }) => {
   const dispatch = useDispatch();
 
   return (
     <Container type="popupBackdrop" trigger={trigger}>
       <Container type="popupCard" trigger={trigger}>
-        <Icon
-          type="popupCloseIcon"
-          iconVal={faTimes}
-          customClickHandler={() =>
-            dispatch(updatePopupState({ isOpen: false, callType: null }))
-          }
-        />
+        {callType !== 'Delete' && (
+          <Icon
+            type="popupCloseIcon"
+            iconVal={faTimes}
+            customClickHandler={() =>
+              dispatch(updatePopupState({ isOpen: false, callType: null }))
+            }
+          />
+        )}
         {children}
       </Container>
     </Container>

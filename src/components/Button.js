@@ -9,8 +9,24 @@ const Button = styled.button`
   outline: none;
   cursor: pointer;
   transition: 0.2s linear;
-  margin: 20px 0;
-  float: right;
+
+  margin: ${({ variant, callType }) => {
+    switch (variant) {
+      case 'formSubmitBtn':
+        return callType !== 'Delete' ? '20px 0' : '20px 30px 20px 0';
+      default:
+        return '';
+    }
+  }};
+
+  float: ${({ variant, callType }) => {
+    switch (variant) {
+      case 'formSubmitBtn':
+        return callType !== 'Delete' ? 'right' : '';
+      default:
+        return '';
+    }
+  }};
 
   &:hover {
     box-shadow: 14px 14px 30px 0 rgb(0 0 0 / 30%);
