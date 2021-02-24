@@ -7,8 +7,8 @@ export const isRequired = arg => {
 
 /**
  * @description Custom hook that triggers a callback if use clicks outside the given element (ref)
- * @param {*} ref required
- * @param {*} callback required
+ * @param {Ref} ref required
+ * @param {Function} callback required
  */
 export const useOutsideAlerter = (
   ref = isRequired('ref'),
@@ -27,4 +27,14 @@ export const useOutsideAlerter = (
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [ref, callback]);
+};
+
+/**
+ * @description Filters array to get only unique values
+ * @param {Array} categoriesList
+ */
+export const getUniqueCategoryValues = categoriesList => {
+  const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+
+  return categoriesList.filter(onlyUnique);
 };

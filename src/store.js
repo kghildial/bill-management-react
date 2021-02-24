@@ -5,7 +5,7 @@ import seederData from './seeder';
 
 // Reducer(s) import(s)
 import { uiStatesReducer } from './reducers/uiStateReducers';
-import { billDataReducers } from './reducers/billDataReducers';
+import { billDataReducer } from './reducers/billDataReducers';
 
 const initialState = {
   uiStates: {
@@ -19,7 +19,7 @@ const initialState = {
 
 const reducer = combineReducers({
   uiStates: uiStatesReducer,
-  billsData: billDataReducers,
+  billsData: billDataReducer,
 });
 
 const middleware = [];

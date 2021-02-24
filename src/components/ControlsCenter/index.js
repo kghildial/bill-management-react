@@ -5,7 +5,7 @@ import { faPlus, faMoneyCheck } from '@fortawesome/free-solid-svg-icons';
 // Custom component(s) import(s)
 import Container from '../../components/Container';
 import Icon from '../Icon';
-import { Select, Label } from './ControlsCenter.style';
+import { Select } from './ControlsCenter.style';
 
 // Action(s) import(s)
 import { updatePopupState } from '../../actions/uiStateActions';
@@ -19,9 +19,7 @@ const ControlsCenter = () => {
         type="addBillIcon"
         label="View Budget Statistics"
         iconVal={faMoneyCheck}
-        customClickHandler={() =>
-          dispatch(updatePopupState({ isOpen: true, callType: 'Add' }))
-        }
+        customClickHandler={() => {}}
       />
 
       <Icon

@@ -56,34 +56,6 @@ const seederData = {
       amount: '2000',
       date: '01-19-2020',
     },
-    {
-      id: 9,
-      description: 'Vacation',
-      category: 'Travel',
-      amount: '3435',
-      date: '01-20-2020',
-    },
-    {
-      id: 10,
-      description: 'Vacation',
-      category: 'Travel',
-      amount: '4530',
-      date: '01-21-2020',
-    },
-    {
-      id: 11,
-      description: 'Vacation',
-      category: 'Travel',
-      amount: '3430',
-      date: '01-22-2020',
-    },
-    {
-      id: 12,
-      description: 'Vacation',
-      category: 'Travel',
-      amount: '3430',
-      date: '01-23-2020',
-    },
   ],
 };
 
