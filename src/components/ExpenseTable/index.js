@@ -4,11 +4,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  faEdit,
-  faTrash,
-  faEllipsisV,
-} from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 // Custom component(s) import(s)
 import { Table, Row, Cell } from './ExpenseTable.style';
