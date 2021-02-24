@@ -11,7 +11,14 @@ export const Select = styled.select`
   outline: none;
   border: none;
   background: #ebebeb;
-  width: 300px;
+  /* width: ${({ id }) => {
+    switch (id) {
+      case 'categoryFilter':
+        return '300px';
+      default:
+        return '';
+    }
+  }}; */
   margin: 0 30px 0 10px;
   cursor: pointer;
 

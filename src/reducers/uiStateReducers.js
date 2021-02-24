@@ -1,13 +1,16 @@
-import { UPDATE_POPUP_STATE } from '../constants/uiStateConstants';
+import {
+  UPDATE_POPUP_STATE,
+  UPDATE_ACTIVE_MONTH,
+} from '../constants/uiStateConstants';
 
 export const uiStatesReducer = (
-  state = { uiStates: { popupState: {} } },
+  state = { uiStates: { popupState: {}, activeMonth: 1 } },
   action
 ) => {
   switch (action.type) {
     case UPDATE_POPUP_STATE:
-      return {
-        ...state.uiStates,
+      const newState = {
+        ...state,
         ...{
           popupState: {
             isOpen: action.payload.isOpen,
@@ -16,6 +19,10 @@ export const uiStatesReducer = (
           },
         },
       };
+
+      return newState;
+    case UPDATE_ACTIVE_MONTH:
+      return { ...state, ...{ activeMonth: action.payload } };
     default:
       return state;
   }

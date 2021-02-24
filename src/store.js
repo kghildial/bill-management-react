@@ -14,8 +14,9 @@ const initialState = {
       callType: null,
       id: null,
     },
+    activeMonth: 1,
   },
-  billsData: seederData.bills,
+  billsData: seederData,
 };
 
 const reducer = combineReducers({

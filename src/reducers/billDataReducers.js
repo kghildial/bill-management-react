@@ -8,30 +8,45 @@ import {
 export const billDataReducer = (state = { billsData: seederData }, action) => {
   switch (action.type) {
     case ADD_BILL:
-      return [...state, action.payload];
+      return {
+        ...state,
+        ...{
+          [action.payload.activeMonth]: [
+            ...state[action.payload.activeMonth],
+            action.payload.data,
+          ],
+        },
+      };
     case EDIT_BILL:
-      const editIndex = state.findIndex(
-        entry => entry.id === action.payload.id
+      const editIndex = state[action.payload.activeMonth].findIndex(
+        entry => entry.id === action.payload.data.id
       );
 
-      let editedBillsData = [...state];
+      let editedBillsData = [...state[action.payload.activeMonth]];
 
       editedBillsData[editIndex] = {
         ...editedBillsData[editIndex],
-        ...action.payload,
+        ...action.payload.data,
       };
 
-      return editedBillsData;
+      return { ...state, ...{ [action.payload.activeMonth]: editedBillsData } };
     case DELETE_BILL:
-      const delIndex = state.findIndex(entry => entry.id === action.payload);
+      const delIndex = state[action.payload.activeMonth].findIndex(
+        entry => entry.id === action.payload.id
+      );
 
-      let newBillsData = [...state];
+      let newBillsData = [...state[action.payload.activeMonth]];
       newBillsData.splice(delIndex, 1);
 
-      return newBillsData.map((entry, index) => {
-        if (index >= delIndex) entry.id -= 1;
-        return entry;
-      });
+      return {
+        ...state,
+        ...{
+          [action.payload.activeMonth]: newBillsData.map((entry, index) => {
+            if (index >= delIndex) entry.id -= 1;
+            return entry;
+          }),
+        },
+      };
     default:
       return state;
   }

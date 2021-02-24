@@ -28,6 +28,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const storeData = {
     popupState: useSelector(state => state.uiStates.popupState),
+    activeMonth: useSelector(state => state.uiStates.activeMonth),
     billsData: useSelector(state => state.billsData),
   };
 
@@ -56,7 +57,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (!!storeData.popupState.id) {
       const matchedData = {
-        ...storeData.billsData.find(
+        ...storeData.billsData[storeData.activeMonth].find(
           entry => entry.id === storeData.popupState.id
         ),
       };
@@ -68,7 +69,7 @@ const Dashboard = () => {
         setFormPreset(matchedData);
       }
     }
-  }, [storeData.popupState.id, storeData.billsData]);
+  }, [storeData.popupState.id, storeData.billsData, storeData.activeMonth]);
 
   return (
     <>
@@ -105,7 +106,9 @@ const Dashboard = () => {
 
               switch (storeData.popupState.callType) {
                 case 'Add':
-                  const newEntryID = storeData.billsData.length + 1;
+                  const newEntryID =
+                    storeData.billsData[storeData.activeMonth].length + 1;
+
                   const addPayload = {
                     id: newEntryID,
                     description,
@@ -113,12 +116,19 @@ const Dashboard = () => {
                     amount,
                     date: formattedDate,
                   };
-                  dispatch(addBillData(addPayload));
+
+                  dispatch(
+                    addBillData({
+                      data: addPayload,
+                      activeMonth: storeData.activeMonth,
+                    })
+                  );
                   break;
                 case 'Edit':
-                  const editTarget = storeData.billsData.find(
-                    entry => entry.id === storeData.popupState.id
-                  );
+                  const editTarget = storeData.billsData[
+                    storeData.activeMonth
+                  ].find(entry => entry.id === storeData.popupState.id);
+
                   const editPayload = {
                     ...editTarget,
                     ...{
@@ -128,10 +138,21 @@ const Dashboard = () => {
                       date: formattedDate,
                     },
                   };
-                  dispatch(editBillData(editPayload));
+
+                  dispatch(
+                    editBillData({
+                      data: editPayload,
+                      activeMonth: storeData.activeMonth,
+                    })
+                  );
                   break;
                 case 'Delete':
-                  dispatch(deleteBillData(storeData.popupState.id));
+                  dispatch(
+                    deleteBillData({
+                      id: storeData.popupState.id,
+                      activeMonth: storeData.activeMonth,
+                    })
+                  );
                   break;
                 default: // Do nothing
               }
@@ -157,7 +178,9 @@ const Dashboard = () => {
                         name="category"
                         label="Category"
                         optionsList={getUniqueCategoryValues(
-                          storeData.billsData.map(entry => entry.category)
+                          storeData.billsData[storeData.activeMonth].map(
+                            entry => entry.category
+                          )
                         )}
                         placeholder="Choose one..."
                       />
@@ -215,7 +238,7 @@ const Dashboard = () => {
               '',
             ]}
             widthData={['10%', '20%', '20%', '20%', '20%', '10%']}
-            data={storeData.billsData}
+            data={storeData.billsData[storeData.activeMonth]}
           />
         </Container>
         <Container type="chartContainer">
