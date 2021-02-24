@@ -168,7 +168,7 @@ const Container = styled.div`
       case 'popupCloseIcon':
         return '20px';
       case 'popupBackdrop':
-        return '90px';
+        return '0';
       case 'popupCard':
         return '-100vh';
       default:
@@ -223,7 +223,7 @@ const Container = styled.div`
       case 'controlsCenterWrapper':
         return '50px';
       case 'popupBackdrop':
-        return 'calc(100vh - 90px)';
+        return '100vh';
       default:
         return '';
     }

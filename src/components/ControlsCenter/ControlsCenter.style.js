@@ -12,7 +12,7 @@ export const Select = styled.select`
   border: none;
   background: #ebebeb;
   width: 300px;
-  margin-right: 30px;
+  margin: 0 30px 0 10px;
   cursor: pointer;
 
   /* &:hover {

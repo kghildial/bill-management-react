@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMoneyCheck } from '@fortawesome/free-solid-svg-icons';
 
 // Custom component(s) import(s)
 import Container from '../../components/Container';
@@ -17,6 +17,15 @@ const ControlsCenter = () => {
     <Container type="controlsCenterWrapper">
       <Icon
         type="addBillIcon"
+        label="View Budget Statistics"
+        iconVal={faMoneyCheck}
+        customClickHandler={() =>
+          dispatch(updatePopupState({ isOpen: true, callType: 'Add' }))
+        }
+      />
+
+      <Icon
+        type="addBillIcon"
         label="Add"
         iconVal={faPlus}
         customClickHandler={() =>
@@ -24,9 +33,9 @@ const ControlsCenter = () => {
         }
       />
 
-      <Label htmlFor="categoryFilter">Filter by category:</Label>
+      {/* <Label htmlFor="categoryFilter">Filter by category:</Label> */}
       <Select id="categoryFilter" name="categoryFilter" value="">
-        <option value="none">None</option>
+        <option value="--select--">Filter by category</option>
       </Select>
     </Container>
   );
