@@ -6,7 +6,7 @@ import Container from '../Container';
 import List from '../List';
 import { IconTag } from './Icon.style';
 
-const Icon = ({ iconVal, iconMenuList }) => {
+const Icon = ({ type, iconVal, iconMenuList }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const clickHandler = () => {
@@ -14,8 +14,8 @@ const Icon = ({ iconVal, iconMenuList }) => {
   };
 
   return (
-    <Container type="iconWrapper" variant="noShadow" onClick={clickHandler}>
-      <IconTag icon={iconVal} />
+    <Container type={type} onClick={clickHandler}>
+      <IconTag type={type} icon={iconVal} />
       {iconMenuList && (
         <List
           type="iconMenu"

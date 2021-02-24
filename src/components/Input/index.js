@@ -7,8 +7,8 @@ import { Label, InputTag } from './Input.style';
 
 const Input = ({ type, name, label, placeholder, validationFn }) => {
   return (
-    <Container type="inputWrapper">
-      {label && <Label htmlFor={name}>{label}</Label>}
+    <Container type="fieldWrapper">
+      {label && <Label htmlFor={name}>{label}:</Label>}
       <InputTag
         id={name}
         type={type}

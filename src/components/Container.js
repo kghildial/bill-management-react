@@ -3,11 +3,23 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
 
+  flex-direction: ${({ type }) => {
+    switch (type) {
+      case 'popupContentWrapper':
+        return 'column';
+      default:
+        return '';
+    }
+  }};
+
   justify-content: ${({ type }) => {
     switch (type) {
       case 'popupBackdrop':
       case 'iconWrapper':
+      case 'popupCloseIcon':
         return 'center';
+      case 'fieldWrapper':
+        return 'space-between';
       default:
         return '';
     }
@@ -18,6 +30,8 @@ const Container = styled.div`
       case 'popupBackdrop':
       case 'headerContainer':
       case 'iconWrapper':
+      case 'popupCloseIcon':
+      case 'fieldWrapper':
         return 'center';
       default:
         return '';
@@ -26,6 +40,8 @@ const Container = styled.div`
 
   position: ${({ type }) => {
     switch (type) {
+      case 'popupCloseIcon':
+        return 'absolute';
       case 'popupBackdrop':
         return 'fixed';
       default:
@@ -35,6 +51,8 @@ const Container = styled.div`
 
   top: ${({ type }) => {
     switch (type) {
+      case 'popupCloseIcon':
+        return '0';
       case 'popupBackdrop':
         return '90px';
       // case 'popupCard':
@@ -53,6 +71,15 @@ const Container = styled.div`
     }
   }};
 
+  right: ${({ type }) => {
+    switch (type) {
+      case 'popupCloseIcon':
+        return '0';
+      default:
+        return '';
+    }
+  }};
+
   width: ${({ type }) => {
     switch (type) {
       case 'headerContainer':
@@ -65,7 +92,10 @@ const Container = styled.div`
       case 'billsListContainer':
         return '55%';
       case 'iconWrapper':
+      case 'popupCloseIcon':
         return '30px';
+      case 'fieldWrapper':
+        return '100%';
       default:
         return '';
     }
@@ -74,6 +104,7 @@ const Container = styled.div`
   height: ${({ type }) => {
     switch (type) {
       case 'iconWrapper':
+      case 'popupCloseIcon':
         return '30px';
       case 'popupBackdrop':
         return 'calc(100vh - 90px)';
@@ -90,6 +121,8 @@ const Container = styled.div`
       case 'billsListContainer':
       case 'iconWrapper':
         return '0 10px';
+      case 'fieldWrapper':
+        return '30px 0 10px';
       default:
         return '';
     }
@@ -100,9 +133,10 @@ const Container = styled.div`
       case 'headerContainer':
         return '0 20px';
       case 'iconWrapper':
+      case 'popupCloseIcon':
         return '5px';
       case 'popupCard':
-        return '30px 50px';
+        return '20px 30px';
       default:
         return '';
     }
@@ -156,10 +190,10 @@ const Container = styled.div`
       case 'chartContainer':
       case 'billsListContainer':
         return '14px 14px 60px 0 rgb(0 0 0 / 20%)';
-      case 'iconWrapper':
-        return variant !== 'noShadow'
-          ? '3px 3px 10px rgb(0 0 0 / 20%), -3px -3px 20px rgb(0 0 0 / 10%)'
-          : '';
+      // case 'iconWrapper':
+      //   return variant !== 'noShadow'
+      //     ? '3px 3px 10px rgb(0 0 0 / 20%), -3px -3px 20px rgb(0 0 0 / 10%)'
+      //     : '';
       default:
         return '';
     }
@@ -168,6 +202,7 @@ const Container = styled.div`
   cursor: ${({ type }) => {
     switch (type) {
       case 'iconWrapper':
+      case 'popupCloseIcon':
         return 'pointer';
       default:
         return '';

@@ -46,8 +46,7 @@ const ExpenseTable = props => {
             </Cell>
             <Cell key={`actionCell_${item.id}`} type="actionCell">
               <Icon
-                // key={`optionsIcon_${item.id}`}
-                type="noShadow"
+                type="iconWrapper"
                 iconVal={faEllipsisV}
                 iconMenuList={['Edit', 'Delete']}
               />

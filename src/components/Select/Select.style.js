@@ -10,8 +10,10 @@ export const SelectField = styled(Field)`
   outline: none;
   border: none;
   background: #ebebeb;
+  width: 300px;
+  margin-left: 30px;
 
-  &::placeholder {
-    color: #aaa;
+  &:hover {
+    box-shadow: 14px 14px 30px 0 rgb(0 0 0 / 30%);
   }
 `;

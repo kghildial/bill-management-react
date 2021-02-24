@@ -7,8 +7,8 @@ import { Label, SelectField } from './Select.style';
 
 const Select = ({ name, label, placeholder, optionsList, validationFn }) => {
   return (
-    <Container type="inputWrapper">
-      {label && <Label htmlFor={name}>{label}</Label>}
+    <Container type="fieldWrapper">
+      {label && <Label htmlFor={name}>{label}:</Label>}
       <SelectField id={name} as="select" name={name} validate={validationFn}>
         {placeholder && <option>{placeholder}</option>}
         {optionsList.map(option => (
@@ -26,7 +26,6 @@ Select.defaultProps = {
 };
 
 Select.propTypes = {
-  type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   optionsList: PropTypes.array,
