@@ -3,15 +3,23 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import seederData from './seeder';
 
+// Reducer(s) import(s)
+import { uiStatesReducer } from './reducers/uiStateReducers';
+import { billDataReducers } from './reducers/billDataReducers';
+
 const initialState = {
-  app: {
-    uiStates: {},
-    dataSeed: seederData.bills,
+  uiStates: {
+    popupState: {
+      isOpen: false,
+      callType: null,
+    },
   },
+  billsData: seederData.bills,
 };
 
 const reducer = combineReducers({
-  app: (state = initialState) => state,
+  uiStates: uiStatesReducer,
+  billsData: billDataReducers,
 });
 
 const middleware = [];

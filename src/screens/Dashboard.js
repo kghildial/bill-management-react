@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import seederData from '../seeder';
 
 // Custom component(s) import(s)
@@ -11,19 +11,16 @@ import Popup from '../components/Popup';
 import Input from '../components/Input';
 import Select from '../components/Select';
 import Button from '../components/Button';
-import Icon from '../components/Icon';
 
 const Dashboard = () => {
-  const [popupState, setPopupState] = useState({
-    isOpen: false,
-    callType: null,
-  });
+  const storeData = {
+    popupState: useSelector(state => state.uiStates.popupState),
+  };
 
   return (
     <>
-      <Popup trigger={popupState.isOpen}>
+      <Popup trigger={storeData.popupState.isOpen}>
         <Container type="popupContentWrapper">
-          <Icon type="popupCloseIcon" iconVal={faTimes} />
           <Heading type="popupHeading" level="2" text="Add/Edit a bill" />
 
           <Formik

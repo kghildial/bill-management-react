@@ -61,7 +61,7 @@ const Container = styled.div`
   top: ${({ type }) => {
     switch (type) {
       case 'popupCloseIcon':
-        return '0';
+        return '20px';
       case 'popupBackdrop':
         return '90px';
       // case 'popupCard':
@@ -83,7 +83,7 @@ const Container = styled.div`
   right: ${({ type }) => {
     switch (type) {
       case 'popupCloseIcon':
-        return '0';
+        return '20px';
       default:
         return '';
     }
@@ -174,6 +174,7 @@ const Container = styled.div`
   z-index: ${({ type }) => {
     switch (type) {
       case 'popupBackdrop':
+      case 'popupCloseIcon':
         return '9999';
       default:
         return '';
