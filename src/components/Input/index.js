@@ -15,6 +15,8 @@ const Input = ({ type, name, label, placeholder, validationFn }) => {
         name={name}
         placeholder={placeholder}
         validate={validationFn}
+        // max="2021-02-28"
+        // min="2021-02-01"
       />
     </Container>
   );

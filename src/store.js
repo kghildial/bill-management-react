@@ -12,6 +12,7 @@ const initialState = {
     popupState: {
       isOpen: false,
       callType: null,
+      id: null,
     },
   },
   billsData: seederData.bills,

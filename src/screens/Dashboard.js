@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
@@ -31,6 +31,39 @@ const Dashboard = () => {
     billsData: useSelector(state => state.billsData),
   };
 
+  const [formPreset, setFormPreset] = useState({
+    description: '',
+    category: '',
+    amount: '',
+    date: '',
+  });
+
+  const resetForm = () => {
+    setFormPreset({
+      description: '',
+      category: '',
+      amount: '',
+      date: '',
+    });
+  };
+
+  // Prefill form for edit
+  useEffect(() => {
+    if (!!storeData.popupState.id) {
+      const matchedData = {
+        ...storeData.billsData.find(
+          entry => entry.id === storeData.popupState.id
+        ),
+      };
+
+      const splitDate = matchedData.date.split('-');
+      matchedData.date = `${splitDate[2]}-${splitDate[0]}-${splitDate[1]}`;
+      delete matchedData.id;
+
+      setFormPreset(matchedData);
+    }
+  }, [storeData.popupState.id, storeData.billsData]);
+
   return (
     <>
       <Popup trigger={storeData.popupState.isOpen}>
@@ -43,14 +76,8 @@ const Dashboard = () => {
 
           <Formik
             enableReinitialize
-            initialValues={{
-              description: '',
-              category: '',
-              amount: '',
-              date: '',
-            }}
+            initialValues={formPreset}
             onSubmit={(values, { setSubmitting }) => {
-              console.log(values);
               const { description, category, amount, date } = values;
               const splitDate = date.split('-');
               const formattedDate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`;
@@ -58,34 +85,45 @@ const Dashboard = () => {
               switch (storeData.popupState.callType) {
                 case 'Add':
                   const newEntryID = storeData.billsData.length + 1;
-                  const payload = {
+                  const addPayload = {
                     id: newEntryID,
                     description,
                     category,
                     amount,
                     date: formattedDate,
                   };
-                  dispatch(addBillData(payload));
+                  dispatch(addBillData(addPayload));
                   break;
                 case 'Edit':
+                  const editTarget = storeData.billsData.find(
+                    entry => entry.id === storeData.popupState.id
+                  );
+                  const editPayload = {
+                    ...editTarget,
+                    ...{
+                      description,
+                      category,
+                      amount,
+                      date: formattedDate,
+                    },
+                  };
+                  dispatch(editBillData(editPayload));
                   break;
                 case 'Delete':
                   break;
                 default: // Do nothing
               }
-
-              // Edit flow
-              // dispatch data to reducer for edit
-
               // Delete flow
               // Send the ID to delete
               // post deletion re-assignment of IDs
 
-              // redux call to update billsData
               // Re-render expense table
               // Close popup & reset callType tp null
               setSubmitting(false);
-              dispatch(updatePopupState({ isOpen: false, callType: null }));
+              resetForm();
+              dispatch(
+                updatePopupState({ isOpen: false, callType: null, id: null })
+              );
             }}
           >
             {({ isSubmitting }) => (

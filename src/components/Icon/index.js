@@ -10,7 +10,14 @@ import { IconTag, Label } from './Icon.style';
 // Action(s) import(s)
 import { updatePopupState } from '../../actions/uiStateActions';
 
-const Icon = ({ type, label, iconVal, iconMenuList, customClickHandler }) => {
+const Icon = ({
+  type,
+  label,
+  iconVal,
+  iconMenuList,
+  customClickHandler,
+  itemID,
+}) => {
   const dispatch = useDispatch();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +28,7 @@ const Icon = ({ type, label, iconVal, iconMenuList, customClickHandler }) => {
 
   const onListItemCLick = option => {
     setIsMenuOpen(false);
-    dispatch(updatePopupState({ isOpen: true, callType: option }));
+    dispatch(updatePopupState({ isOpen: true, callType: option, id: itemID }));
   };
 
   return (

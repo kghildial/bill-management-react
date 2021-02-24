@@ -49,6 +49,7 @@ const ExpenseTable = props => {
                 type="iconWrapper"
                 iconVal={faEllipsisV}
                 iconMenuList={['Edit', 'Delete']}
+                itemID={item.id}
               />
               {/* <Icon iconVal={faEdit} /> */}
               {/* <Icon iconVal={faTrash} /> */}

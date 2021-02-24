@@ -12,6 +12,7 @@ export const uiStatesReducer = (
           popupState: {
             isOpen: action.payload.isOpen,
             callType: action.payload.callType,
+            id: action.payload.id,
           },
         },
       };
