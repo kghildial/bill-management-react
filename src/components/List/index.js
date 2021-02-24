@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 // Custom component(s) import(s)
 import { ListTag, ListItem } from './List.style';
 
-const List = ({ type, listData }) => {
+const List = ({ type, listData, trigger }) => {
   return (
-    <ListTag type={type}>
+    <ListTag type={type} trigger={trigger}>
       {listData.map((item, index) => (
         <ListItem key={`listItem_${index + 1}`} type={type}>
           {item}

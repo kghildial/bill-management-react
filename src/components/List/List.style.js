@@ -47,6 +47,15 @@ export const ListTag = styled.ul`
     }
   }};
 
+  height: ${({ type, trigger }) => {
+    switch (type) {
+      case 'iconMenu':
+        return trigger ? '90px' : '0';
+      default:
+        return '';
+    }
+  }};
+
   box-shadow: ${({ type }) => {
     switch (type) {
       case 'iconMenu':
@@ -64,11 +73,28 @@ export const ListTag = styled.ul`
         return '';
     }
   }};
+
+  transition: height 0.5s cubic-bezier(0, 0, 0.56, 1.33);
+
+  overflow: hidden;
 `;
 
 export const ListItem = styled.li`
   padding: 10px 20px;
+
   border-bottom: 1px solid #ccc;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
   width: 100%;
   text-align: left;
+
+  transition: 0.3s linear;
+
+  &:hover {
+    background: #009eff;
+    color: #fff;
+  }
 `;

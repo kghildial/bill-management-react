@@ -9,10 +9,16 @@ import { IconTag } from './Icon.style';
 const Icon = ({ iconVal, iconMenuList }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const clickHandler = () => {
+    setIsMenuOpen(true);
+  };
+
   return (
-    <Container type="iconWrapper" variant="noShadow">
+    <Container type="iconWrapper" variant="noShadow" onClick={clickHandler}>
       <IconTag icon={iconVal} />
-      {iconMenuList && <List type="iconMenu" listData={iconMenuList} />}
+      {iconMenuList && (
+        <List type="iconMenu" listData={iconMenuList} trigger={isMenuOpen} />
+      )}
     </Container>
   );
 };
