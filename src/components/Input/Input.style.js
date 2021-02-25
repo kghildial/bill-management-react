@@ -22,4 +22,8 @@ export const InputTag = styled(Field)`
   &:hover {
     box-shadow: 14px 14px 30px 0 rgb(0 0 0 / 30%);
   }
+
+  @media only screen and (max-width: 768px) {
+    width: 60%;
+  }
 `;

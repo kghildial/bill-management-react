@@ -27,4 +27,8 @@ export const IconTag = styled(FontAwesomeIcon)`
 export const Label = styled.label`
   margin: 5px 20px 5px 5px;
   cursor: pointer;
+
+  @media only screen and (max-width: 385px) {
+    margin: 5px 10px 5px 5px;
+  }
 `;

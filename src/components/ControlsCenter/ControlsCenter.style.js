@@ -25,4 +25,8 @@ export const Select = styled.select`
   /* &:hover {
     box-shadow: 14px 14px 30px 0 rgb(0 0 0 / 30%);
   } */
+
+  @media only screen and (max-width: 385px) {
+    margin: 0 10px 0 0;
+  }
 `;

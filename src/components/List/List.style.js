@@ -50,7 +50,7 @@ export const ListTag = styled.ul`
   height: ${({ type, trigger }) => {
     switch (type) {
       case 'iconMenu':
-        return trigger ? '90px' : '0';
+        return trigger ? (window.innerWidth > 768 ? '90px' : '80px') : '0';
       default:
         return '';
     }

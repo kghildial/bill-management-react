@@ -354,6 +354,72 @@ const Container = styled.div`
         return '';
     }
   }};
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: ${({ type }) => {
+      switch (type) {
+        case 'contentWrapper':
+          return 'column';
+        default:
+          return '';
+      }
+    }};
+
+    justify-content: ${({ type }) => {
+      switch (type) {
+        case 'headerContainer':
+          return 'center';
+        default:
+          return '';
+      }
+    }};
+
+    width: ${({ type }) => {
+      switch (type) {
+        case 'billsListContainer':
+        case 'chartContainer':
+          return '100%';
+        default:
+          return '';
+      }
+    }};
+
+    margin: ${({ type, variant }) => {
+      switch (type) {
+        case 'billsListContainer':
+        case 'chartContainer':
+          return '0';
+        case 'addBillIcon':
+          return '0 15px';
+        case 'controlsCenterWrapper':
+          return variant === 'expenseTable' ? '10px auto' : '30px auto 0';
+        case 'chartWrapper':
+          return '0 30px 0 0';
+        default:
+          return '';
+      }
+    }};
+
+    padding: ${({ type }) => {
+      switch (type) {
+        case 'addBillIcon':
+          return '0 10px';
+        case 'popupCard':
+          return '20px 15px';
+        default:
+          return '';
+      }
+    }};
+
+    font-size: ${({ type }) => {
+      switch (type) {
+        case 'paymentStatsIcon':
+          return '13px';
+        default:
+          return '';
+      }
+    }};
+  }
 `;
 
 export default Container;

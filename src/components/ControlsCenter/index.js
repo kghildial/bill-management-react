@@ -29,13 +29,15 @@ const ControlsCenter = ({ variant }) => {
         <>
           <Icon
             type="addBillIcon"
-            label="Add"
+            label={window.innerWidth >= 768 ? 'Add' : ''}
             iconVal={faPlus}
             customClickHandler={() =>
               dispatch(updatePopupState({ isOpen: true, callType: 'Add' }))
             }
           />
-          <Label htmlFor="categoryFilter">Month:</Label>
+          {window.innerWidth > 768 && (
+            <Label htmlFor="categoryFilter">Month:</Label>
+          )}
           <Select
             id="monthFilter"
             name="monthFilter"

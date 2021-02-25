@@ -266,34 +266,45 @@ const Dashboard = () => {
         </Container>
         <Container type="chartContainer">
           <ControlsCenter variant="chartSection" />
-          <BarChart
-            width={500}
-            height={300}
-            data={chartData}
-            margin={{
-              top: 30,
-              right: 0,
-              left: 0,
-              bottom: 30,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend wrapperStyle={{ left: 0, bottom: -10 }} />
-            <Bar dataKey={getMonthName(storeData.activeMonth)} fill="#8884d8">
-              {chartData.map((entry, index) => (
-                <Cell
-                  fill={
-                    entry[getMonthName(storeData.activeMonth)] > 3000
-                      ? '#82ca9d'
-                      : '#8884d8'
-                  }
-                />
-              ))}
-            </Bar>
-          </BarChart>
+          <Container type="chartWrapper">
+            <BarChart
+              width={
+                window.innerWidth <= 768
+                  ? window.innerWidth <= 385
+                    ? 350
+                    : 400
+                  : 500
+              }
+              height={300}
+              data={chartData}
+              margin={{
+                top: 30,
+                right: 0,
+                left: 0,
+                bottom: 30,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="name"
+                tick={{ fontSize: window.innerWidth <= 768 ? 10 : 16 }}
+              />
+              <YAxis tick={{ fontSize: window.innerWidth <= 768 ? 10 : 16 }} />
+              <Tooltip />
+              <Legend wrapperStyle={{ left: 0, bottom: 10 }} />
+              <Bar dataKey={getMonthName(storeData.activeMonth)} fill="#8884d8">
+                {chartData.map((entry, index) => (
+                  <Cell
+                    fill={
+                      entry[getMonthName(storeData.activeMonth)] > 3000
+                        ? '#82ca9d'
+                        : '#8884d8'
+                    }
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </Container>
         </Container>
       </Container>
     </>

@@ -15,15 +15,18 @@ const ExpenseTable = props => {
     <Table>
       <thead>
         <Row>
-          {props.headingData.map((item, index) => (
-            <Cell
-              type="headCell"
-              key={`heading_${index + 1}`}
-              width={props.widthData[index]}
-            >
-              {item}
-            </Cell>
-          ))}
+          {props.headingData.map(
+            (item, index) =>
+              !(item === 'Category' && window.innerWidth <= 768) && (
+                <Cell
+                  type="headCell"
+                  key={`heading_${index + 1}`}
+                  width={props.widthData[index]}
+                >
+                  {item}
+                </Cell>
+              )
+          )}
         </Row>
       </thead>
       <tbody>
@@ -35,9 +38,11 @@ const ExpenseTable = props => {
             <Cell key={`dateCell_${item.id}`} type="dataCell">
               {item.date}
             </Cell>
-            <Cell key={`categoryCell_${item.id}`} type="dataCell">
-              {item.category}
-            </Cell>
+            {window.innerWidth > 768 && (
+              <Cell key={`categoryCell_${item.id}`} type="dataCell">
+                {item.category}
+              </Cell>
+            )}
             <Cell key={`descriptionCell_${item.id}`} type="dataCell">
               {item.description}
             </Cell>
