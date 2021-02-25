@@ -21,12 +21,15 @@ export const IconTag = styled(FontAwesomeIcon)`
           return '';
       }
     }};
+
+    color: ${({ isactive }) => (isactive ? 'green' : '#666')};
   }
 `;
 
 export const Label = styled.label`
   margin: 5px 20px 5px 5px;
   cursor: pointer;
+  color: ${({ isactive }) => (isactive ? 'green' : '#666')};
 
   @media only screen and (max-width: 385px) {
     margin: 5px 10px 5px 5px;

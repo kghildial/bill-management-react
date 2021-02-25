@@ -16,6 +16,11 @@ const initialState = {
     },
     activeMonth: 1,
     activeCategory: '',
+    activeBudget: 50000,
+    budgetAnalysis: {
+      isOn: false,
+      highlightedSet: [],
+    },
   },
   billsData: seederData,
 };

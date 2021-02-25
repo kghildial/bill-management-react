@@ -24,15 +24,21 @@ import Select from '../components/Select';
 import Button from '../components/Button';
 
 // Actions(s) import(s);
-import { updatePopupState } from '../actions/uiStateActions';
+import {
+  updatePopupState,
+  updateBudgetAnalysisState,
+} from '../actions/uiStateActions';
+
 import {
   addBillData,
   editBillData,
   deleteBillData,
 } from '../actions/billsDataActions';
 
+import { updateActiveBudget } from '../actions/uiStateActions';
+
 // Custom hook(s) / util method(s) import(s)
-import { getMonthName, getChartData } from '../utils';
+import { getBudgetAnalysisData, getChartData } from '../utils';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -42,6 +48,8 @@ const Dashboard = () => {
     billsData: useSelector(state => state.billsData),
     categories: useSelector(state => state.categories),
     activeCategory: useSelector(state => state.uiStates.activeCategory),
+    activeBudget: useSelector(state => state.uiStates.activeBudget),
+    budgetAnalysis: useSelector(state => state.uiStates.budgetAnalysis),
   };
 
   const [formPreset, setFormPreset] = useState({
@@ -91,6 +99,16 @@ const Dashboard = () => {
   useEffect(() => {
     setChartData(getChartData(storeData.billsData[storeData.activeMonth]));
   }, [storeData.activeMonth, storeData.billsData]);
+
+  useEffect(() => {
+    if (storeData.budgetAnalysis.isOn)
+      dispatch(
+        updateBudgetAnalysisState({
+          isOn: false,
+          highlightedSet: getBudgetAnalysisData(storeData),
+        })
+      );
+  }, [chartData, dispatch]); // storeData dependency not required here
 
   return (
     <>
@@ -205,7 +223,7 @@ const Dashboard = () => {
                         type="number"
                         name="amount"
                         label="Amount"
-                        placeholder="Budget Friendly... ?"
+                        placeholder="Enter the expense..."
                       />
                       <Input type="date" name="date" label="Date" />
                     </>
@@ -292,19 +310,47 @@ const Dashboard = () => {
               <YAxis tick={{ fontSize: window.innerWidth <= 768 ? 10 : 16 }} />
               <Tooltip />
               <Legend wrapperStyle={{ left: 0, bottom: 10 }} />
-              <Bar dataKey={getMonthName(storeData.activeMonth)} fill="#8884d8">
+              <Bar dataKey="amount" fill="#8884d8">
                 {chartData.map((entry, index) => (
                   <Cell
-                    fill={
-                      entry[getMonthName(storeData.activeMonth)] > 3000
+                    fill={(() => {
+                      return storeData.budgetAnalysis.highlightedSet.indexOf(
+                        Number(entry.amount)
+                      ) !== -1
                         ? '#82ca9d'
-                        : '#8884d8'
-                    }
+                        : '#8884d8';
+                    })()}
                   />
                 ))}
               </Bar>
             </BarChart>
           </Container>
+
+          <Formik
+            initialValues={{
+              budget: 50000,
+            }}
+            onSubmit={({ budget }, { setSubmitting }) => {
+              dispatch(updateActiveBudget(budget));
+              setSubmitting(false);
+            }}
+          >
+            {({ isSubmitting }) => (
+              <Form>
+                <Container type="budgetIpFormWrapper">
+                  <Input
+                    type="number"
+                    name="budget"
+                    label="What's your Budget?"
+                    placeholder="Default: 50000"
+                  />
+                  <Button type="submit" disabled={isSubmitting}>
+                    Submit
+                  </Button>
+                </Container>
+              </Form>
+            )}
+          </Formik>
         </Container>
       </Container>
     </>

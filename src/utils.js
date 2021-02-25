@@ -57,12 +57,49 @@ export const getMonthName = monthNum =>
 
 export const getChartData = billsData => {
   const clonedData = [...billsData];
-  const chartData = clonedData.map(entry => ({
-    name: `${entry.date.split('-')[1]} ${getMonthName(
+
+  let chartData = [];
+  for (let entry of clonedData) {
+    const keyName = `${entry.date.split('-')[1]} ${getMonthName(
       Number(entry.date.split('-')[0])
-    )}`,
-    [getMonthName(Number(entry.date.split('-')[0]))]: entry.amount,
-  }));
+    )}`;
+    const dataIndex = chartData.findIndex(item => item.name === keyName);
+
+    if (dataIndex === -1) {
+      chartData.push({
+        name: keyName,
+        amount: Number(entry.amount),
+      });
+    } else {
+      chartData[dataIndex].amount += Number(entry.amount);
+    }
+  }
+
+  // // const chartData = clonedData.map(entry => ({
+  // //   name: `${entry.date.split('-')[1]} ${getMonthName(
+  // //     Number(entry.date.split('-')[0])
+  // //   )}`,
+  // //   amount: entry.amount,
+  // // }));
 
   return chartData;
+};
+
+export const getBudgetAnalysisData = storeData => {
+  let amountsList = storeData.billsData[storeData.activeMonth].map(
+    entry => entry.amount
+  );
+  let descAmountsList = amountsList.sort((a, b) => b - a);
+
+  let userBudget = storeData.activeBudget;
+  let filterdAmts = [];
+
+  for (let amt of descAmountsList) {
+    if (userBudget - Number(amt) >= 0) {
+      filterdAmts.push(Number(amt));
+      userBudget -= Number(amt);
+    }
+  }
+
+  return filterdAmts;
 };

@@ -17,6 +17,7 @@ const Icon = ({
   iconMenuList,
   customClickHandler,
   itemID,
+  isactive,
 }) => {
   const dispatch = useDispatch();
 
@@ -33,8 +34,8 @@ const Icon = ({
 
   return (
     <Container type={type} onClick={customClickHandler || clickHandler}>
-      <IconTag type={type} icon={iconVal} />
-      {label && <Label>{label}</Label>}
+      <IconTag type={type} icon={iconVal} isactive={isactive} />
+      {label && <Label isactive={isactive}>{label}</Label>}
       {iconMenuList && (
         <List
           type="iconMenu"

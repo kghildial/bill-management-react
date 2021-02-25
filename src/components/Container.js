@@ -117,6 +117,7 @@ const Container = styled.div`
       case 'popupContentWrapper':
       case 'billsListContainer':
       case 'chartContainer':
+      case 'budgetIpFormWrapper':
         return 'column';
       default:
         return '';
@@ -128,6 +129,7 @@ const Container = styled.div`
       case 'popupBackdrop':
       case 'iconWrapper':
       case 'popupCloseIcon':
+      case 'budgetIpFormWrapper':
         return 'center';
       case 'fieldWrapper':
         return 'space-between';
@@ -149,6 +151,7 @@ const Container = styled.div`
       case 'addBillIcon':
       case 'paymentStatsIcon':
       case 'chartContainer':
+      case 'budgetIpFormWrapper':
         return 'center';
       default:
         return '';

@@ -13,14 +13,21 @@ import {
   updatePopupState,
   updateActiveMonth,
   updateActiveCategory,
+  updateBudgetAnalysisState,
 } from '../../actions/uiStateActions';
+
+// Custom util method(s) import(s)
+import { getBudgetAnalysisData } from '../../utils';
 
 const ControlsCenter = ({ variant }) => {
   const dispatch = useDispatch();
   const storeData = {
+    billsData: useSelector(state => state.billsData),
     activeMonth: useSelector(state => state.uiStates.activeMonth),
     categories: useSelector(state => state.categories),
     activeCategory: useSelector(state => state.uiStates.activeCategory),
+    activeBudget: useSelector(state => state.uiStates.activeBudget),
+    budgetAnalysis: useSelector(state => state.uiStates.budgetAnalysis),
   };
 
   return (
@@ -80,10 +87,24 @@ const ControlsCenter = ({ variant }) => {
         <>
           <Heading type="chartHeading" level="3" text="Time-Series chart" />
           <Icon
+            isactive={storeData.budgetAnalysis.isOn}
             type="paymentStatsIcon"
-            label="Payment Statistics"
+            label="View budget Analysis"
             iconVal={faMoneyCheck}
-            customClickHandler={() => {}}
+            customClickHandler={() => {
+              if (storeData.budgetAnalysis.isOn) {
+                dispatch(
+                  updateBudgetAnalysisState({ isOn: false, highlightedSet: [] })
+                );
+              } else {
+                dispatch(
+                  updateBudgetAnalysisState({
+                    isOn: true,
+                    highlightedSet: getBudgetAnalysisData(storeData),
+                  })
+                );
+              }
+            }}
           />
         </>
       )}
