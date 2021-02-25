@@ -158,6 +158,7 @@ const Container = styled.div`
   position: ${({ type }) => {
     switch (type) {
       case 'popupCloseIcon':
+      case 'tableBodyWrapper':
         return 'absolute';
       case 'popupBackdrop':
         return 'fixed';
@@ -170,6 +171,8 @@ const Container = styled.div`
     switch (type) {
       case 'popupCloseIcon':
         return '20px';
+      case 'tableBodyWrapper':
+        return '70px';
       case 'popupBackdrop':
         return '0';
       case 'popupCard':
@@ -238,6 +241,19 @@ const Container = styled.div`
         return '50px';
       case 'popupBackdrop':
         return '100vh';
+      case 'tableBodyWrapper':
+        return `${window.innerHeight - 220}px`;
+      case 'billsListContainer':
+        return `${window.innerHeight - 220 + 70}px`;
+      default:
+        return '';
+    }
+  }};
+
+  overflow-y: ${({ type }) => {
+    switch (type) {
+      case 'tableBodyWrapper':
+        return 'scroll';
       default:
         return '';
     }
@@ -301,6 +317,8 @@ const Container = styled.div`
       case 'popupBackdrop':
       case 'popupCloseIcon':
         return '9999';
+      case 'controlsCenterWrapper':
+        return '99';
       default:
         return '';
     }
@@ -379,6 +397,24 @@ const Container = styled.div`
         case 'billsListContainer':
         case 'chartContainer':
           return '100%';
+        default:
+          return '';
+      }
+    }};
+
+    height: ${({ type }) => {
+      switch (type) {
+        case 'billsListContainer':
+          return '470px';
+        default:
+          return '';
+      }
+    }};
+
+    max-height: ${({ type }) => {
+      switch (type) {
+        case 'tableBodyWrapper':
+          return '400px';
         default:
           return '';
       }
