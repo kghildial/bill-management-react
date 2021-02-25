@@ -57,6 +57,13 @@ const seederData = {
       date: '01-09-2020',
     },
     {
+      id: 9,
+      description: 'Jaguar',
+      category: 'Sedan',
+      amount: '500',
+      date: '01-09-2020',
+    },
+    {
       id: 10,
       description: 'BMW',
       category: 'Sedan',

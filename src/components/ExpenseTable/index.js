@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,6 +13,11 @@ import Icon from '../Icon';
 import Container from '../Container';
 
 const ExpenseTable = props => {
+  const storeData = {
+    activeMonth: useSelector(state => state.uiStates.activeMonth),
+    billsData: useSelector(state => state.billsData),
+  };
+
   return (
     <>
       <Table type="headerTable">

@@ -35,7 +35,11 @@ const Icon = ({
   return (
     <Container type={type} onClick={customClickHandler || clickHandler}>
       <IconTag type={type} icon={iconVal} isactive={isactive} />
-      {label && <Label isactive={isactive}>{label}</Label>}
+      {label && (
+        <Label type={type} isactive={isactive}>
+          {label}
+        </Label>
+      )}
       {iconMenuList && (
         <List
           type="iconMenu"

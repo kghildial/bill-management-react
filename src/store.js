@@ -1,5 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistReducer, persistStore } from 'redux-persist';
+import storageSession from 'redux-persist/lib/storage/session';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 import seederData from './seeder';
 
@@ -25,6 +28,14 @@ const initialState = {
   billsData: seederData,
 };
 
+// Config to generate Persisted Reducer
+const persistConfig = {
+  key: 'root',
+  storage: storageSession,
+  stateReconciler: autoMergeLevel2,
+  blacklist: ['router'],
+};
+
 const reducer = combineReducers({
   uiStates: uiStatesReducer,
   billsData: billDataReducer,
@@ -42,12 +53,16 @@ const reducer = combineReducers({
   ],
 });
 
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+// Thunk / Saga not used since we don't have API calls
 const middleware = [];
 
-const store = createStore(
-  reducer,
+export const store = createStore(
+  persistedReducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
 
-export default store;
+// Persisted Store for PersistGate
+export const persistor = persistStore(store);

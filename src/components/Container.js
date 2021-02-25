@@ -132,7 +132,7 @@ const Container = styled.div`
       case 'budgetIpFormWrapper':
         return 'center';
       case 'fieldWrapper':
-        return 'space-between';
+        return 'flex-end';
       case 'controlsCenterWrapper':
         return variant === 'chartSection' ? 'space-between' : 'flex-end';
       default:
@@ -306,6 +306,15 @@ const Container = styled.div`
     }
   }};
 
+  color: ${({ type }) => {
+    switch (type) {
+      case 'fieldErrorWrapper':
+        return 'red';
+      default:
+        return '';
+    }
+  }};
+
   backdrop-filter: ${({ type }) => {
     switch (type) {
       case 'popupBackdrop':
@@ -400,6 +409,8 @@ const Container = styled.div`
         case 'billsListContainer':
         case 'chartContainer':
           return '100%';
+        case 'popupCard':
+          return '97vw';
         default:
           return '';
       }
@@ -427,13 +438,16 @@ const Container = styled.div`
       switch (type) {
         case 'billsListContainer':
         case 'chartContainer':
-          return '0';
+          return '30px 0 0';
         case 'addBillIcon':
           return '0 15px';
         case 'controlsCenterWrapper':
           return variant === 'expenseTable' ? '10px auto' : '30px auto 0';
         case 'chartWrapper':
           return '0 30px 0 0';
+
+        case 'budgetIpFormWrapper':
+          return '0 0 30px 0;';
         default:
           return '';
       }
@@ -442,6 +456,7 @@ const Container = styled.div`
     padding: ${({ type }) => {
       switch (type) {
         case 'addBillIcon':
+        case 'budgetIpFormWrapper':
           return '0 10px';
         case 'popupCard':
           return '20px 15px';

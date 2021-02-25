@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ErrorMessage } from 'formik';
 
 // Custom component(s) import(s)
 import Container from '../Container';
@@ -18,6 +19,9 @@ const Input = ({ type, name, label, placeholder, validationFn }) => {
         // max="2021-02-28"
         // min="2021-02-01"
       />
+      <Container type="fieldErrorWrapper">
+        <ErrorMessage name={name} />
+      </Container>
     </Container>
   );
 };

@@ -22,14 +22,28 @@ export const IconTag = styled(FontAwesomeIcon)`
       }
     }};
 
-    color: ${({ isactive }) => (isactive ? 'green' : '#666')};
+    color: ${({ type, isactive }) => {
+      switch (type) {
+        case 'paymentStatsIcon':
+          return isactive ? 'green' : '';
+        default:
+          return '';
+      }
+    }};
   }
 `;
 
 export const Label = styled.label`
   margin: 5px 20px 5px 5px;
   cursor: pointer;
-  color: ${({ isactive }) => (isactive ? 'green' : '#666')};
+  color: ${({ type, isactive }) => {
+    switch (type) {
+      case 'paymentStatsIcon':
+        return isactive ? 'green' : '';
+      default:
+        return '';
+    }
+  }};
 
   @media only screen and (max-width: 385px) {
     margin: 5px 10px 5px 5px;

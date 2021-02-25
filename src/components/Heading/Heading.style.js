@@ -21,7 +21,7 @@ export const HeadingTag = styled(props =>
         case 'logo':
           return '25px';
         case 'chartHeading':
-          return '17px';
+          return '15px';
         default:
           return '';
       }

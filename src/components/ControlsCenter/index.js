@@ -89,7 +89,11 @@ const ControlsCenter = ({ variant }) => {
           <Icon
             isactive={storeData.budgetAnalysis.isOn}
             type="paymentStatsIcon"
-            label="View budget Analysis"
+            label={
+              storeData.budgetAnalysis.isOn
+                ? 'Budget Analysis On'
+                : 'View budget Analysis'
+            }
             iconVal={faMoneyCheck}
             customClickHandler={() => {
               if (storeData.budgetAnalysis.isOn) {

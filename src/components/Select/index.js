@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ErrorMessage } from 'formik';
 
 // Custom component(s) import(s)
 import Container from '../Container';
@@ -22,6 +23,9 @@ const Select = ({ name, label, placeholder, optionsList, validationFn }) => {
           </option>
         ))}
       </SelectField>
+      <Container type="fieldErrorWrapper">
+        <ErrorMessage name={name} />
+      </Container>
     </Container>
   );
 };

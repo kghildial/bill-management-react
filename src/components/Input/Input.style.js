@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 import { Field } from 'formik';
 
-export const Label = styled.label``;
+export const Label = styled.label`
+  margin-right: 30px;
+  flex: 1;
+
+  @media only screen and (max-width: 768px) {
+    margin-left: 10px;
+  }
+`;
 
 export const InputTag = styled(Field)`
   padding: 10px 20px;
@@ -25,5 +32,6 @@ export const InputTag = styled(Field)`
 
   @media only screen and (max-width: 768px) {
     width: 60%;
+    margin-left: 10px;
   }
 `;

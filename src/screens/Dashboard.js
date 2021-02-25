@@ -104,7 +104,7 @@ const Dashboard = () => {
     if (storeData.budgetAnalysis.isOn)
       dispatch(
         updateBudgetAnalysisState({
-          isOn: false,
+          isOn: true,
           highlightedSet: getBudgetAnalysisData(storeData),
         })
       );
@@ -212,20 +212,49 @@ const Dashboard = () => {
                         name="description"
                         label="Description"
                         placeholder="Something good..."
+                        validationFn={value => {
+                          let errMsg = '';
+                          if (!value) errMsg = 'This field is required!';
+
+                          return errMsg;
+                        }}
                       />
                       <Select
                         name="category"
                         label="Category"
                         optionsList={storeData.categories}
                         placeholder="Choose one..."
+                        validationFn={value => {
+                          let errMsg = '';
+                          if (value === 'Choose one...')
+                            errMsg = 'This field is required!';
+
+                          return errMsg;
+                        }}
                       />
                       <Input
                         type="number"
                         name="amount"
                         label="Amount"
                         placeholder="Enter the expense..."
+                        validationFn={value => {
+                          let errMsg = '';
+                          if (!value) errMsg = 'This field is required!';
+
+                          return errMsg;
+                        }}
                       />
-                      <Input type="date" name="date" label="Date" />
+                      <Input
+                        type="date"
+                        name="date"
+                        label="Date"
+                        validationFn={value => {
+                          let errMsg = '';
+                          if (!value) errMsg = 'This field is required!';
+
+                          return errMsg;
+                        }}
+                      />
                     </>
                   )}
                   <Button
