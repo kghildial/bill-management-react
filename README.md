@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Car Wash Bills Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A sample bill management dashboard built using React & Redux (Scroll further below for more detials...)
 
-## Available Scripts
+<img src="./public/Dashboard.png">
+<img src="./public/Popup.png">
+<img src="./public/Mobile_Dashboard.jpg" width="30%" style="margin:0 100px">
+<img src="./public/Mobile_Popup.jpg" width="30%" style="margin:0 100px">
 
-In the project directory, you can run:
+<!-- ![Mob Dashboard](./public/Mobile_Dashboard.jpg) -->
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Level 1
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- The dashboard has Add, Edit, Delete functionality
 
-### `npm test`
+- The Bills are listed on Monthly basis
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Time-series graphs represent each month's expenditure visually in real time
 
-### `npm run build`
+- All components are created, desinged and animated manually from scratch (No CSS component design library used)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The app is fully responsive between desktop & mobile devices, with fluid component design & styles
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- The entries can be filtered by category
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- When handling data, for ease of demo purposes the year has been locked to '2020', with choice to perform all above operations across the months & dates
 
-### `npm run eject`
+### Level 2
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- The Time series graph has a "View Budget Analysis" feature
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- When toggled, it higlights the minimum number of bills that should be paid such that their total value does not exceed the monthly budget value while meeting the condition that no more bills can be added from the remaining bills.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- This feature renders in real time as well
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Technical Specifications
 
-## Learn More
+- Built over CRA
+- Built using React Hooks
+- React Router
+- Redux based on session data
+- Redux Persist
+- Formik
+- Styled Components
+- ReCharts
+- Fontswesome
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Setup Instructions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- After cloning / downloading
+- `npm install`
+- `npm start`
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+< > by [Kinshuk Ghildial](http://kinshukghildial.com/) :fire:
