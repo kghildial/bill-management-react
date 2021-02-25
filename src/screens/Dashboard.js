@@ -108,7 +108,7 @@ const Dashboard = () => {
           highlightedSet: getBudgetAnalysisData(storeData),
         })
       );
-  }, [chartData, dispatch]); // storeData dependency not required here
+  }, [chartData, storeData.activeBudget, dispatch]); // storeData dependency not required here
 
   return (
     <>
@@ -142,11 +142,12 @@ const Dashboard = () => {
               const { description, category, amount, date } = values;
               const splitDate = date.split('-');
               const formattedDate = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`;
+              const chosenMonth = Number(splitDate[1]);
 
               switch (storeData.popupState.callType) {
                 case 'Add':
                   const newEntryID =
-                    storeData.billsData[storeData.activeMonth].length + 1;
+                    storeData.billsData[chosenMonth].length + 1;
 
                   const addPayload = {
                     id: newEntryID,
@@ -159,14 +160,14 @@ const Dashboard = () => {
                   dispatch(
                     addBillData({
                       data: addPayload,
-                      activeMonth: storeData.activeMonth,
+                      month: chosenMonth,
                     })
                   );
                   break;
                 case 'Edit':
-                  const editTarget = storeData.billsData[
-                    storeData.activeMonth
-                  ].find(entry => entry.id === storeData.popupState.id);
+                  const editTarget = storeData.billsData[chosenMonth].find(
+                    entry => entry.id === storeData.popupState.id
+                  );
 
                   const editPayload = {
                     ...editTarget,
@@ -181,9 +182,17 @@ const Dashboard = () => {
                   dispatch(
                     editBillData({
                       data: editPayload,
-                      activeMonth: storeData.activeMonth,
+                      month: chosenMonth,
                     })
                   );
+
+                  if (chosenMonth !== storeData.activeMonth)
+                    dispatch(
+                      deleteBillData({
+                        id: storeData.popupState.id,
+                        activeMonth: storeData.activeMonth,
+                      })
+                    );
                   break;
                 case 'Delete':
                   dispatch(
@@ -254,6 +263,16 @@ const Dashboard = () => {
 
                           return errMsg;
                         }}
+                        min={`2020-${
+                          [10, 11, 12].indexOf(storeData.activeMonth) !== -1
+                            ? storeData.activeMonth
+                            : `0${storeData.activeMonth}`
+                        }-01`}
+                        max={`2020-${
+                          [10, 11, 12].indexOf(storeData.activeMonth) !== -1
+                            ? storeData.activeMonth
+                            : `0${storeData.activeMonth}`
+                        }-31`}
                       />
                     </>
                   )}
@@ -342,6 +361,7 @@ const Dashboard = () => {
               <Bar dataKey="amount" fill="#8884d8">
                 {chartData.map((entry, index) => (
                   <Cell
+                    key={`amount_${storeData.activeMonth}_${index + 1}`}
                     fill={(() => {
                       return storeData.budgetAnalysis.highlightedSet.indexOf(
                         Number(entry.amount)
@@ -372,8 +392,18 @@ const Dashboard = () => {
                     name="budget"
                     label="What's your Budget?"
                     placeholder="Default: 50000"
+                    validationFn={value => {
+                      let errMsg = '';
+                      if (!value) errMsg = 'This field is required!';
+
+                      return errMsg;
+                    }}
                   />
-                  <Button type="submit" disabled={isSubmitting}>
+                  <Button
+                    style={{ marginLeft: '20px', marginTop: '20px' }}
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
                     Submit
                   </Button>
                 </Container>

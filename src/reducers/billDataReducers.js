@@ -11,25 +11,25 @@ export const billDataReducer = (state = { billsData: seederData }, action) => {
       return {
         ...state,
         ...{
-          [action.payload.activeMonth]: [
-            ...state[action.payload.activeMonth],
+          [action.payload.month]: [
+            ...state[action.payload.month],
             action.payload.data,
           ],
         },
       };
     case EDIT_BILL:
-      const editIndex = state[action.payload.activeMonth].findIndex(
+      const editIndex = state[action.payload.month].findIndex(
         entry => entry.id === action.payload.data.id
       );
 
-      let editedBillsData = [...state[action.payload.activeMonth]];
+      let editedBillsData = [...state[action.payload.month]];
 
       editedBillsData[editIndex] = {
         ...editedBillsData[editIndex],
         ...action.payload.data,
       };
 
-      return { ...state, ...{ [action.payload.activeMonth]: editedBillsData } };
+      return { ...state, ...{ [action.payload.month]: editedBillsData } };
     case DELETE_BILL:
       const delIndex = state[action.payload.activeMonth].findIndex(
         entry => entry.id === action.payload.id

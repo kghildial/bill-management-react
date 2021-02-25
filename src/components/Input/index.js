@@ -6,7 +6,7 @@ import { ErrorMessage } from 'formik';
 import Container from '../Container';
 import { Label, InputTag } from './Input.style';
 
-const Input = ({ type, name, label, placeholder, validationFn }) => {
+const Input = ({ type, name, label, placeholder, validationFn, min, max }) => {
   return (
     <Container type="fieldWrapper">
       {label && <Label htmlFor={name}>{label}:</Label>}
@@ -16,8 +16,8 @@ const Input = ({ type, name, label, placeholder, validationFn }) => {
         name={name}
         placeholder={placeholder}
         validate={validationFn}
-        // max="2021-02-28"
-        // min="2021-02-01"
+        max="2020-12-31"
+        min="2020-01-01"
       />
       <Container type="fieldErrorWrapper">
         <ErrorMessage name={name} />

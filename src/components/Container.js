@@ -162,6 +162,7 @@ const Container = styled.div`
     switch (type) {
       case 'popupCloseIcon':
       case 'tableBodyWrapper':
+      case 'fieldErrorWrapper':
         return 'absolute';
       case 'popupBackdrop':
         return 'fixed';
@@ -185,10 +186,21 @@ const Container = styled.div`
     }
   }};
 
+  bottom: ${({ type }) => {
+    switch (type) {
+      case 'fieldErrorWrapper':
+        return '-20px';
+      default:
+        return '';
+    }
+  }};
+
   left: ${({ type }) => {
     switch (type) {
       case 'popupBackdrop':
         return '0';
+      case 'fieldErrorWrapper':
+        return 'calc(100% - 300px)';
       default:
         return '';
     }
@@ -198,6 +210,15 @@ const Container = styled.div`
     switch (type) {
       case 'popupCloseIcon':
         return '20px';
+      default:
+        return '';
+    }
+  }};
+
+  font-size: ${({ type }) => {
+    switch (type) {
+      case 'fieldErrorWrapper':
+        return '12px';
       default:
         return '';
     }

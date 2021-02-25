@@ -16,7 +16,11 @@ const Select = ({ name, label, placeholder, optionsList, validationFn }) => {
         name={name}
         validate={validationFn}
       >
-        {placeholder && <option>{placeholder}</option>}
+        {placeholder && (
+          <option value={placeholder} selected>
+            {placeholder}
+          </option>
+        )}
         {optionsList.map(option => (
           <option key={`category_${option}`} value={option}>
             {option}
